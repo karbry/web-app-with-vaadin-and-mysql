@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 @Component
 public class EmployeeService {
 // przypisanie danych z database do instancji klasy
@@ -21,5 +22,19 @@ public class EmployeeService {
         jdbcTemplate.update("UPDATE employees SET FirstName=?, LastName=?, Email=?, Salary=?, Role=? WHERE ID=?",
                 employee.getFirstname(), employee.getLastname(), employee.getEmail(), employee.getSalary(), employee.getRole(), employee.getId());
     }
+
+//usunięcie
+    public void delete(Employee employee) {
+        jdbcTemplate.update("DELETE FROM employees WHERE ID=?",
+                employee.getId());
+    }
+
+//dodanie
+    public void add(String fname, String lname, String email, String salary, String role) {
+
+        jdbcTemplate.update("INSERT INTO `webapp`.`employees` (`FirstName`, `LastName`, `Email`, `Salary`, `Role`) " +
+                        "VALUES (?,?,?,?,?)",
+                fname, lname, email, salary, role);
+}
 
 }

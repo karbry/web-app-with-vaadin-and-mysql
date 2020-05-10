@@ -16,7 +16,7 @@ public class VaadinUI extends UI {
     private EmployeeService service;
 
     private Employee employee;
-
+    private List<Employee> employees;
     private Binder<Employee> binder = new Binder<>(Employee.class);
 
     private Grid<Employee> grid = new Grid(Employee.class);
@@ -26,6 +26,8 @@ public class VaadinUI extends UI {
     private TextField salary = new TextField("Salary");
     private TextField role = new TextField("Role");
     private Button save = new Button("Save", e -> saveEmployee());
+    private Button delete = new Button("Delete", e -> deleteEmployee());
+    private Button add = new Button("Add", e -> addEmployee());
 
     @Override
     protected void init(VaadinRequest request) {
@@ -36,26 +38,39 @@ public class VaadinUI extends UI {
 
         binder.bindInstanceFields(this);
 
-        VerticalLayout test = new VerticalLayout(firstName, lastName, email, salary, role, save);
-        HorizontalLayout layout = new HorizontalLayout(grid, test);
+        VerticalLayout input = new VerticalLayout(firstName, lastName, email, salary, role, save, delete, add);
+        HorizontalLayout layout = new HorizontalLayout(grid, input);
         setContent(layout);
 
     }
 
     private void updateGrid() {
-        List<Employee> employees = service.findAll();
+        employees = service.findAll();
         grid.setItems(employees);
+
     }
 
     private void updateForm() {
 
         employee = grid.asSingleSelect().getValue();
         binder.setBean(employee);
-        }
+    }
 
     private void saveEmployee() {
         service.update(employee);
         updateGrid();
+    }
+
+    private void deleteEmployee() {
+        service.delete(employee);
+        updateGrid();
+    }
+
+    private void addEmployee() {
+
+        service.add(firstName.getValue(), lastName.getValue(), email.getValue(), salary.getValue(), role.getValue());
+        updateGrid();
+
     }
 
 }
