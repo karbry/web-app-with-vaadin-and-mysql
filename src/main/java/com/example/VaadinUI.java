@@ -1,20 +1,23 @@
 package com.example;
 
 import com.vaadin.data.Binder;
+
+
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
+import javafx.scene.control.DatePicker;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.textfield.NumberField;
 import java.util.List;
 
 //@CssImport("sciezka")
 @SpringUI
+
 public class VaadinUI extends UI {
 
     @Autowired
     private EmployeeService service;
-
     private Employee employee;
     private List<Employee> employees;
     private Binder<Employee> binder = new Binder<>(Employee.class);
@@ -28,6 +31,7 @@ public class VaadinUI extends UI {
     private Button save = new Button("Save", e -> saveEmployee());
     private Button delete = new Button("Delete", e -> deleteEmployee());
     private Button add = new Button("Add", e -> addEmployee());
+    //private DatePicker date = new DatePicker();
 
     @Override
     protected void init(VaadinRequest request) {
