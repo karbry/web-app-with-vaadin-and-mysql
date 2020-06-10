@@ -6,11 +6,11 @@ public class Employee {
     private String firstname;
     private String lastname;
     private String email;
-    private String salary; //na razie string, bo numberfield coś nie działa potem trzeba zmienić na float/ int
+    private String salary;
     private String role;
-    private String date; //trzeba ogarnąć konwersje zmiennej typu data z mysql do javy
+    private String date;
 
-    public Employee(int id, String firstname, String lastname, String email, String salary, String role/*, String date */) {
+    public Employee(int id, String firstname, String lastname, String email, String salary, String role, String date) {
         super();
         this.id = id;
         this.firstname = firstname;
@@ -18,7 +18,7 @@ public class Employee {
         this.email = email;
         this.salary = salary;
         this.role = role;
-        //this.date = date;
+        this.date = date;
     }
 
     public Employee() {
@@ -73,5 +73,13 @@ public class Employee {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
