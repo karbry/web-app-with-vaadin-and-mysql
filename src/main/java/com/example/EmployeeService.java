@@ -14,8 +14,8 @@ public class EmployeeService {
     private JdbcTemplate jdbcTemplate;
 
     public List<Employee> findAll() {
-        return jdbcTemplate.query("SELECT ID, FirstName, LastName, Email, Salary, Role FROM employees",
-                (rs, rowNum) -> new Employee(rs.getInt("ID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), rs.getString("Salary"), rs.getString("Role")));
+        return jdbcTemplate.query("SELECT ID, FirstName, LastName, Email, Salary, Role, StartDate FROM employees",
+                (rs, rowNum) -> new Employee(rs.getInt("ID"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Email"), rs.getString("Salary"), rs.getString("Role"), rs.getString("StartDate")));
     }
 //edycja
     public void update(Employee employee) {
